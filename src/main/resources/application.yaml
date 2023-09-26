@@ -1,0 +1,7 @@
+
+application:
+  cors:
+    allowed-origins: http://localhost:8100
+
+server:
+  port: 8085
