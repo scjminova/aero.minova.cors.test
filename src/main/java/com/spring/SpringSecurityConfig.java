@@ -22,15 +22,8 @@ public class SpringSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
 		http
-				.authorizeHttpRequests(requests -> requests
-						.requestMatchers("/cors-test").permitAll()
-						.anyRequest().authenticated()
-				)
 				.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()));
-
-
 		return http.build();
 	}
 
@@ -40,15 +33,12 @@ public class SpringSecurityConfig {
 		corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
 		corsConfiguration.setExposedHeaders(Arrays.asList("*"));
 
-		corsConfiguration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
+		//corsConfiguration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", corsConfiguration);
-
 		return source;
 	}
-
-
 
 	@PostConstruct
 	private void checkApplicationCorsAllowedOrigins(){
